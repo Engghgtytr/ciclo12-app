@@ -13,7 +13,7 @@ main.container {
   padding: var(--esp-4) 0 var(--esp-5);
 }
 .abertura-site h1 {
-  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+  font-size: clamp(2rem, 6vw, 2.9rem);
   letter-spacing: -0.02em;
   max-width: 22ch;
 }
@@ -99,7 +99,7 @@ main.container {
   font-variant-numeric: tabular-nums;
   color: var(--cor-texto);
 }
-.economia h3 { font-size: 1.05rem; }
+.economia h3 { font-size: var(--tam-h3); }
 .economia p { margin: 0; }
 .grafico { margin: 0; }
 .grafico figcaption {

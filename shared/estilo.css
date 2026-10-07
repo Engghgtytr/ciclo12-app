@@ -42,8 +42,8 @@
   --tam-base: 1rem;
   --tam-pequeno: 0.875rem;
   --tam-h1: clamp(1.6rem, 5vw, 2.4rem);
-  --tam-h2: clamp(1.3rem, 4vw, 1.8rem);
-  --tam-h3: 1.15rem;
+  --tam-h2: clamp(1.6rem, 4.5vw, 2.1rem);
+  --tam-h3: 1.25rem;
 
   /* Espaços, cantos e sombra */
   --esp-1: 0.25rem;
