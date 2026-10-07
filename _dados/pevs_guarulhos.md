@@ -59,3 +59,17 @@ Cooperativa Eco Guarulhos/ACRAT, Cooper Guaru, Flacipel (Cabuçu), Sucata Digita
 | Achar 2 a 3 pontos de **doação de alimento** (banco de alimentos, ONG, igreja) e confirmar | Bárbara | Idem |
 | Confirmar endereço da escola e aprovação do nome do projeto | Julia | OK por escrito |
 | Pesquisar 3 a 5 dados **de Guarulhos** (coleta seletiva, resíduos por habitante, etc.) com fonte oficial | Davi | Lista "dado + fonte + link + data". **Nada sem fonte** |
+
+---
+
+## CORREÇÕES conferidas na fonte (Agência Mural) em 07/10/2026
+
+A cópia acima é literal do plano. Ao abrir a matéria da Mural, achamos diferenças. **Vale o que está aqui embaixo** (é o que o `shared/pontos.js` usa):
+
+1. **Horário ampliado tem 10 PEVs, não 9.** O **Jurema** (Rua Jacutinga, 470) está na lista de horário ampliado da matéria. A Parte B o colocou no horário regular por engano.
+2. **Horário ampliado = todos os dias, 7h às 19h.** Exceção: **Gopoúva, de segunda a sábado, 7h às 19h**. (Frase da matéria: "Alguns funcionam em horário ampliado, todos os dias, das 7h às 19h. Apenas o Ecoponto do Gopoúva, no Centro, está aberto de segunda a sábado das 7h às 19h.")
+3. **A matéria diz o que NÃO pode:** resíduos úmidos domiciliares (restos de comida e lixo de banheiro), **lâmpadas fluorescentes**, borra de lava-rápido, **pilhas e baterias**, óleos lubrificantes, telhas e caixas d'água com amianto. Então pilha, lâmpada fluorescente e comida passam de "não confirmado" para **"não aceita"**.
+4. **Continuam sem informação na matéria:** celular e roupa → "confirmar".
+5. **Lista do que pode, mais detalhada que a Parte B:** entulho e materiais de construção, gesso, solo, sofás, colchões, madeiras e troncos, folhas e capina, esquadrias, sanitários cerâmicos, eletrodomésticos, óleo de cozinha, telhas e caixas d'água de fibrocimento sem amianto, pneus, papel, plástico, metal, vidro. Quantidades permitidas: site da prefeitura.
+6. **Pontos de referência dados pela matéria** (ajudam a conferir no Google Maps): Paraventi (próximo ao CIESP), Continental (atrás do CEU Continental), Presidente Dutra (esquina com R. Maria Paula Mota), Jurema (esquina com R. Guarapiranga), Bom Clima (ao lado do Thomeuzão), Macedo (atrás do Corpo de Bombeiros), **Vila Galvão (altura do nº 615 da Av. Pedro de Souza Lopes)**, Cabuçu (em frente ao nº 7800, Escola Maria Helena Faria Lima e Cunha), Fortaleza (ao lado do reservatório do SAAE), Haroldo Veloso (esquina com R. Dalva de Oliveira), Cidade Soimco (altura do nº 119).
+7. O endereço do Gopoúva na matéria é "Rua Guarulhos, 34 – Gopoúva" (região Central). O conflito com "Rua Nadir, 34" continua: veio de outra fonte e não foi resolvido.
