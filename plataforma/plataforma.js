@@ -99,6 +99,10 @@
     abas.appendChild(aba("cadastro", "Criar conta"));
     area.appendChild(el("section", { className: "cartao entrada", "aria-labelledby": "t-entrada" }, [
       el("h2", { id: "t-entrada", text: modo === "entrar" ? "Entrar na plataforma" : "Criar conta" }),
+      dados.modo === "demo" ? el("div", { className: "aviso aviso-exemplo", role: "note" }, [
+        el("span", { className: "aviso-titulo", text: "Modo demonstração" }),
+        el("span", { text: "Nada aqui vai para o banco de dados: fica só neste navegador. Não use uma senha que você usa em outros sites." })
+      ]) : null,
       abas, corpo
     ]));
 

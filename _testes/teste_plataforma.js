@@ -100,6 +100,16 @@ const ontem = new Date(Date.now() - 86400e3).toISOString().slice(0, 10);
   await p.click('#area form button[type=submit]');
   await p.waitForSelector('.ola');
   ok('cadastro de receptor: entra e fica "Aguardando aprovação"', /Aguardando aprovação/.test(await p.textContent('#area')));
+  const guardado = await p.evaluate(() => JSON.stringify(localStorage));
+  const conta = await p.evaluate(() => JSON.parse(localStorage.getItem('ciclo-prato-demo')).usuarios.find(u => u.email === 'banco.teste@exemplo.com'));
+  ok('SEGURANÇA: a senha digitada NÃO fica guardada em texto (só hash com sal)', !guardado.includes('senhaforte1') && /^[0-9a-f]{64}$/.test(conta.hash) && !!conta.sal && conta.senha === undefined);
+  await sair();
+  ok('modo demonstração: aviso "não use uma senha de outros sites" na tela de entrar', /Não use uma senha que você usa em outros sites/.test(await p.textContent('#area')));
+  await p.fill('#l-email', 'banco.teste@exemplo.com'); await p.fill('#l-senha', 'senhaerrada');
+  await p.click('#area form button[type=submit]'); await p.waitForSelector('#mensagem .aviso-conflito');
+  ok('senha errada é recusada', /E-mail ou senha errados/.test(await p.textContent('#mensagem')));
+  await p.fill('#l-senha', 'senhaforte1'); await p.click('#area form button[type=submit]'); await p.waitForSelector('.ola');
+  ok('senha certa entra (conferida pelo hash)', /Banco de Alimentos Teste/.test(await p.textContent('.ola')));
   ok('sem erros de console', erros.filter(e => !/ALERTA/.test(e)).length === 0, erros.join(' | '));
 
   // Supabase fora do ar → plano B liga sozinho

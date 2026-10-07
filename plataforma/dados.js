@@ -121,10 +121,10 @@
       return {
         seq: 10,
         usuarios: [
-          { id: "u-doador", email: "doador.demo@exemplo.com", senha: "demo1234", perfil: "doador", nome: "Padaria Exemplo", organizacao: "Padaria Exemplo (fictícia)", aprovado: true, criado_em: ts(30) },
-          { id: "u-receptor", email: "receptor.demo@exemplo.com", senha: "demo1234", perfil: "receptor", nome: "ONG Exemplo", organizacao: "ONG Exemplo (fictícia)", aprovado: true, criado_em: ts(29) },
-          { id: "u-admin", email: "admin.demo@exemplo.com", senha: "demo1234", perfil: "admin", nome: "Admin do grupo", organizacao: null, aprovado: true, criado_em: ts(31) },
-          { id: "u-pendente", email: "pendente.demo@exemplo.com", senha: "demo1234", perfil: "receptor", nome: "Projeto Exemplo", organizacao: "Projeto Exemplo (fictício)", aprovado: false, criado_em: ts(2) }
+          { id: "u-doador", email: "doador.demo@exemplo.com", senhaDemo: "demo1234", perfil: "doador", nome: "Padaria Exemplo", organizacao: "Padaria Exemplo (fictícia)", aprovado: true, criado_em: ts(30) },
+          { id: "u-receptor", email: "receptor.demo@exemplo.com", senhaDemo: "demo1234", perfil: "receptor", nome: "ONG Exemplo", organizacao: "ONG Exemplo (fictícia)", aprovado: true, criado_em: ts(29) },
+          { id: "u-admin", email: "admin.demo@exemplo.com", senhaDemo: "demo1234", perfil: "admin", nome: "Admin do grupo", organizacao: null, aprovado: true, criado_em: ts(31) },
+          { id: "u-pendente", email: "pendente.demo@exemplo.com", senhaDemo: "demo1234", perfil: "receptor", nome: "Projeto Exemplo", organizacao: "Projeto Exemplo (fictício)", aprovado: false, criado_em: ts(2) }
         ],
         doacoes: [
           { id: 1, doador_id: "u-doador", alimento: "Pães do dia (EXEMPLO)", categoria: "padaria", quantidade_kg: 4, validade: diasISO(1), bairro: "Vila Galvão", horario_retirada: "Hoje, 18h às 19h", observacoes: "Dado fictício da demonstração.", status: "disponivel", criado_em: ts(0, -3), reservada_em: null, retirada_em: null },
@@ -140,8 +140,35 @@
     }
     function ler() {
       if (memoria) { return memoria; }
-      try { var s = localStorage.getItem(CHAVE); if (s) { return JSON.parse(s); } } catch (e) { /* bloqueado */ }
+      try {
+        var s = localStorage.getItem(CHAVE);
+        if (s) {
+          var d0 = JSON.parse(s);
+          // versões antigas guardavam a senha em texto: apaga (as contas fictícias continuam com demo1234)
+          var mudou = false;
+          d0.usuarios.forEach(function (u) {
+            if (u.senha !== undefined) { if (u.id.indexOf("u-") === 0) { u.senhaDemo = "demo1234"; } delete u.senha; mudou = true; }
+          });
+          if (mudou) { gravar(d0); }
+          return d0;
+        }
+      } catch (e) { /* bloqueado */ }
       var d = semente(); gravar(d); return d;
+    }
+    /* Senha de conta criada no modo demonstração: guarda só o hash SHA-256 com "sal", nunca a senha.
+       (As 4 contas fictícias usam a senha pública "demo1234", escrita na própria tela.) */
+    function hashSenha(sal, senha) {
+      if (!(raiz.crypto && raiz.crypto.subtle && raiz.TextEncoder)) {
+        return Promise.reject(erro("Este navegador não permite criar conta no modo demonstração. Use uma das contas de demonstração."));
+      }
+      return raiz.crypto.subtle.digest("SHA-256", new TextEncoder().encode(sal + ":" + senha)).then(function (buf) {
+        return Array.prototype.map.call(new Uint8Array(buf), function (b) { return b.toString(16).padStart(2, "0"); }).join("");
+      });
+    }
+    function novoSal() {
+      var a = new Uint8Array(16);
+      if (raiz.crypto && raiz.crypto.getRandomValues) { raiz.crypto.getRandomValues(a); } else { for (var i = 0; i < 16; i++) { a[i] = Math.floor(Math.random() * 256); } }
+      return Array.prototype.map.call(a, function (b) { return b.toString(16).padStart(2, "0"); }).join("");
     }
     function gravar(d) { try { localStorage.setItem(CHAVE, JSON.stringify(d)); memoria = null; } catch (e) { memoria = d; } }
     function idSessao() { try { return localStorage.getItem(CHAVE_SESSAO); } catch (e) { return memoria && memoria._sessao; } }
@@ -163,19 +190,26 @@
       reiniciar: function () { gravar(semente()); setSessao(null); return vazio(); },
       sessao: function () { return tentar(function () { var u = eu(ler()); return u ? { id: u.id, email: u.email, perfil: perfilPublico(u) } : null; }); },
       entrar: function (email, senha) {
-        return tentar(function () {
-          var u = ler().usuarios.filter(function (x) { return x.email.toLowerCase() === String(email).toLowerCase(); })[0];
-          precisa(u && u.senha === senha, "E-mail ou senha errados.");
+        var u = ler().usuarios.filter(function (x) { return x.email.toLowerCase() === String(email).toLowerCase(); })[0];
+        if (!u) { return Promise.reject(erro("E-mail ou senha errados.")); }
+        var conferir = u.senhaDemo !== undefined ? Promise.resolve(u.senhaDemo === senha)
+          : u.hash ? hashSenha(u.sal, senha).then(function (h) { return h === u.hash; }) : Promise.resolve(false);
+        return conferir.then(function (certo) {
+          if (!certo) { throw erro("E-mail ou senha errados."); }
           setSessao(u.id);
         });
       },
       cadastrar: function (dd) {
-        return tentar(function () {
-          var d = ler();
-          precisa(!d.usuarios.some(function (x) { return x.email.toLowerCase() === dd.email.toLowerCase(); }), "Este e-mail já tem cadastro. Use \"Entrar\".");
+        var d = ler();
+        if (d.usuarios.some(function (x) { return x.email.toLowerCase() === dd.email.toLowerCase(); })) {
+          return Promise.reject(erro("Este e-mail já tem cadastro. Use \"Entrar\"."));
+        }
+        var sal = novoSal();
+        return hashSenha(sal, dd.senha).then(function (h) {
+          var d2 = ler();
           var perfil = dd.perfil === "receptor" ? "receptor" : "doador"; // ninguém vira admin pelo cadastro
-          var u = { id: "u" + (++d.seq), email: dd.email, senha: dd.senha, perfil: perfil, nome: dd.nome, organizacao: dd.organizacao || null, aprovado: perfil === "doador", criado_em: new Date().toISOString() };
-          d.usuarios.push(u); gravar(d); setSessao(u.id);
+          var u = { id: "u" + (++d2.seq), email: dd.email, sal: sal, hash: h, perfil: perfil, nome: dd.nome, organizacao: dd.organizacao || null, aprovado: perfil === "doador", criado_em: new Date().toISOString() };
+          d2.usuarios.push(u); gravar(d2); setSessao(u.id);
           return { precisaConfirmar: false };
         });
       },
