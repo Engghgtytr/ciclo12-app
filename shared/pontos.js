@@ -1455,13 +1455,13 @@
      telefone/mensagem, no mesmo formato, trocando status para "confirmado-contato" e
      preenchendo "confirmadoEm" (data do contato) e "fonte" (com quem falaram). */
   var DOACAO = [
-    { id: "doacao-exemplo-1", nome: "EXEMPLO — ponto de doação de roupas", tipo: "doacao", endereco: null, bairro: null, horario: null,
+    { id: "doacao-exemplo-1", nome: "EXEMPLO: ponto de doação de roupas", tipo: "doacao", endereco: null, bairro: null, horario: null,
       aceita: ["roupa"], naoAceita: [], naoConfirmado: [], lat: null, lng: null, coordPrecisao: "sem", status: "exemplo",
       fonte: null, confirmadoEm: null, nota: "Modelo fictício. Não é um local real." },
-    { id: "doacao-exemplo-2", nome: "EXEMPLO — banco de alimentos", tipo: "doacao", endereco: null, bairro: null, horario: null,
+    { id: "doacao-exemplo-2", nome: "EXEMPLO: banco de alimentos", tipo: "doacao", endereco: null, bairro: null, horario: null,
       aceita: ["comida"], naoAceita: [], naoConfirmado: [], lat: null, lng: null, coordPrecisao: "sem", status: "exemplo",
       fonte: null, confirmadoEm: null, nota: "Modelo fictício. Não é um local real." },
-    { id: "doacao-exemplo-3", nome: "EXEMPLO — bazar beneficente", tipo: "doacao", endereco: null, bairro: null, horario: null,
+    { id: "doacao-exemplo-3", nome: "EXEMPLO: bazar beneficente", tipo: "doacao", endereco: null, bairro: null, horario: null,
       aceita: ["roupa"], naoAceita: [], naoConfirmado: [], lat: null, lng: null, coordPrecisao: "sem", status: "exemplo",
       fonte: null, confirmadoEm: null, nota: "Modelo fictício. Não é um local real." }
   ];
