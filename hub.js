@@ -196,15 +196,60 @@
     return box;
   }
 
+  /* Leaflet (biblioteca do mapa) só é baixado quando alguém abre a aba do mapa.
+     Assim a página inicial não depende de internet externa nem fica em branco esperando o CDN.
+     Os hashes "integrity" garantem que o arquivo baixado é exatamente o Leaflet 1.9.4. */
+  var LEAFLET = {
+    css: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css",
+    cssHash: "sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==",
+    js: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js",
+    jsHash: "sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+  };
+  var estadoLeaflet = window.L ? "pronto" : "nao-iniciado"; // nao-iniciado | carregando | pronto | falhou
+  function carregarLeaflet(depois) {
+    if (estadoLeaflet === "pronto" || estadoLeaflet === "falhou") { depois(); return; }
+    if (estadoLeaflet === "carregando") { return; }
+    estadoLeaflet = "carregando";
+    var faltam = 2, deuErro = false; // espera o CSS e o JS
+    function umPronto(ok) {
+      if (!ok) { deuErro = true; }
+      faltam -= 1;
+      if (faltam === 0) { estadoLeaflet = (!deuErro && window.L) ? "pronto" : "falhou"; depois(); }
+    }
+    var css = document.createElement("link");
+    css.onload = function () { umPronto(true); };
+    css.onerror = function () { umPronto(false); };
+    css.rel = "stylesheet"; css.href = LEAFLET.css; css.integrity = LEAFLET.cssHash;
+    css.crossOrigin = "anonymous"; css.referrerPolicy = "no-referrer";
+    document.head.appendChild(css);
+    var js = document.createElement("script");
+    js.src = LEAFLET.js; js.integrity = LEAFLET.jsHash;
+    js.crossOrigin = "anonymous"; js.referrerPolicy = "no-referrer";
+    js.onload = function () { umPronto(true); };
+    js.onerror = function () { umPronto(false); };
+    document.body.appendChild(js);
+  }
+
   function iniciarMapa() {
     var area = $("mapa-area");
     if (mapa) { setTimeout(function () { mapa.invalidateSize(); }, 50); return; }
+    if (estadoLeaflet !== "pronto" && estadoLeaflet !== "falhou") {
+      if (estadoLeaflet === "nao-iniciado") {
+        area.classList.add("mapa-sem-leaflet");
+        area.textContent = "Carregando o mapa...";
+        desenhar(); // a lista já aparece enquanto o mapa baixa
+      }
+      carregarLeaflet(iniciarMapa);
+      return;
+    }
     if (!window.L) {
       area.classList.add("mapa-sem-leaflet");
       area.textContent = "O mapa não carregou (sem internet?). A lista de ecopontos continua funcionando.";
       desenhar();
       return;
     }
+    area.classList.remove("mapa-sem-leaflet");
+    area.textContent = "";
     mapa = L.map(area, { scrollWheelZoom: false }).setView([ESCOLA.lat, ESCOLA.lng], 13);
     var ruas = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,

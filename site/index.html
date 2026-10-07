@@ -9,6 +9,7 @@
 <link rel="icon" href="../shared/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../shared/estilo.css">
 <link rel="stylesheet" href="site.css">
+<script>/* animação: marca a página antes de desenhar (ver shared/animacao.js) */if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){document.documentElement.classList.add("anim-js")}</script>
 </head>
 <body>
 <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
@@ -30,7 +31,7 @@
 
 <main id="conteudo" class="container">
 
-  <section class="abertura-site" aria-labelledby="t-site">
+  <section class="abertura-site anim-entrada" aria-labelledby="t-site">
     <p class="sobretitulo">Ciclo 12 · Água e energia em casa</p>
     <h1 id="t-site">Quanto o banho da sua casa gasta de água e de luz?</h1>
     <p class="lead">Veja os dados, faça a conta com os números da sua casa e escolha por onde começar a economizar.</p>
@@ -195,6 +196,8 @@
     </div>
   </div>
 </footer>
+
+<script src="../shared/animacao.js"></script>
 
 <script src="site.js"></script>
 </body>

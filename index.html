@@ -7,11 +7,9 @@
 <meta name="description" content="Ciclo 12: cinco problemas de consumo, dados com fonte, mapa de descarte em Guarulhos e quatro módulos para a ODS 12.">
 <meta name="theme-color" content="#17673f">
 <link rel="icon" href="shared/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
-      integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
-      crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="shared/estilo.css">
 <link rel="stylesheet" href="hub.css">
+<script>/* animação: marca a página antes de desenhar (ver shared/animacao.js) */if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){document.documentElement.classList.add("anim-js")}</script>
 </head>
 <body>
 <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
@@ -35,7 +33,7 @@
   <!-- ================= INÍCIO ================= -->
   <section id="inicio" class="aba-tela" aria-labelledby="t-inicio">
     <div class="abertura">
-      <div class="abertura-texto">
+      <div class="abertura-texto anim-entrada">
         <p class="sobretitulo">ODS 12 · Consumo e produção responsáveis</p>
         <h1 id="t-inicio">Cinco problemas de consumo. Quatro ferramentas para agir em Guarulhos.</h1>
         <p class="lead">Dados com fonte, mapa de descarte perto da escola e módulos para descartar, doar e economizar.</p>
@@ -292,9 +290,8 @@
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
-        integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="shared/animacao.js"></script>
+
 <script src="shared/pontos.js"></script>
 <script src="hub.js"></script>
 </body>

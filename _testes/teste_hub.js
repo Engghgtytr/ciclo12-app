@@ -35,7 +35,7 @@ const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', n
     ok(`[${tag}] problemas sem rolagem horizontal`, await semRolagem(p));
     await p.screenshot({ path: `prints1/problemas-${tag}.png`, fullPage: true });
     await p.click('.navegacao a[data-aba=mapa]');
-    await p.waitForTimeout(1500);
+    await p.waitForFunction(() => document.querySelector('.leaflet-marker-icon') || /não carregou/.test(document.getElementById('mapa-area').textContent), null, { timeout: 15000 }); await p.waitForTimeout(300);
     const n = await p.locator('#lista-pontos > li').count();
     const marc = await p.locator('.leaflet-marker-icon .pino').count();
     const escola = await p.locator('.leaflet-marker-icon .pino-escola-marcador').count();
@@ -53,7 +53,7 @@ const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', n
   // ordem por distância, filtro, popup (1280 claro, tiles liberados)
   {
     const { ctx, p, erros } = await pagina({ w: 1280, cs: 'light' });
-    await p.goto(URL + '#mapa', { waitUntil: 'networkidle' }); await p.waitForTimeout(2500);
+    await p.goto(URL + '#mapa', { waitUntil: 'networkidle' }); await p.waitForFunction(() => document.querySelector('.leaflet-marker-icon') || /não carregou/.test(document.getElementById('mapa-area').textContent), null, { timeout: 15000 }); await p.waitForTimeout(2000);
     const kms = await p.$$eval('#lista-pontos .km', els => els.map(e => e.textContent));
     const nums = kms.filter(t => /km/.test(t)).map(t => parseFloat(t.replace('≈', '').replace(',', '.')));
     ok('ordenado do mais perto ao mais longe (a partir da escola)', nums.every((v, i) => i === 0 || v >= nums[i - 1]), kms.slice(0, 4).join(' / '));
@@ -81,7 +81,7 @@ const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', n
   // geolocalização falsa perto do PEV Pimentas: a ordem muda
   {
     const { ctx, p } = await pagina({ w: 390, cs: 'light', geo: { latitude: -23.43701, longitude: -46.40845 }, bloquearRuas: true });
-    await p.goto(URL + '#mapa', { waitUntil: 'networkidle' }); await p.waitForTimeout(800);
+    await p.goto(URL + '#mapa', { waitUntil: 'networkidle' }); await p.waitForFunction(() => document.querySelector('.leaflet-marker-icon') || /não carregou/.test(document.getElementById('mapa-area').textContent), null, { timeout: 15000 });
     await p.click('#btn-perto'); await p.waitForTimeout(1200);
     const prim = await p.$$eval('#lista-pontos .nome', els => els.slice(0, 2).map(e => e.textContent));
     ok('"perto de mim" com GPS falso no Pimentas: 1º = Pimentas', prim[0] === 'Pimentas', prim.join(', '));
@@ -102,7 +102,7 @@ const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', n
   // Leaflet bloqueado (CDN fora do ar)
   {
     const { ctx, p, erros } = await pagina({ w: 390, cs: 'light', bloquearLeaflet: true });
-    await p.goto(URL + '#mapa', { waitUntil: 'load' }); await p.waitForTimeout(800);
+    await p.goto(URL + '#mapa', { waitUntil: 'load' }); await p.waitForFunction(() => document.querySelector('.leaflet-marker-icon') || /não carregou/.test(document.getElementById('mapa-area').textContent), null, { timeout: 15000 });
     ok('sem Leaflet: aviso no lugar do mapa e lista com 33', /não carregou/.test(await p.textContent('#mapa-area')) && (await p.locator('#lista-pontos .item-ponto').count()) === 33);
     ok('sem Leaflet: nenhum erro de JavaScript', erros.filter(e => /pageerror/.test(e)).length === 0, erros.join(' | ').slice(0, 200));
     await ctx.close();
