@@ -58,10 +58,10 @@
       iniciar: function () {
         return comTempo(carregarSupabase().then(function () {
           sb = raiz.supabase.createClient(cfg.supabaseUrl, cfg.supabaseChave);
-          // teste rápido: o servidor responde? (sem login, a tabela devolve vazio ou "sem permissão", ambos servem)
-          return sb.from("doacoes").select("id", { head: true, count: "exact" }).limit(1);
+          // teste rápido: o servidor de login responde? (rota oficial de saúde do Supabase)
+          return fetch(cfg.supabaseUrl.replace(/\/+$/, "") + "/auth/v1/health", { headers: { apikey: cfg.supabaseChave } });
         }).then(function (resp) {
-          if (resp.error && !/permission denied|JWT|row-level/i.test(resp.error.message || "") && resp.status !== 401) { throw traduzir(resp.error); }
+          if (!resp.ok) { throw erro("O Supabase respondeu com erro " + resp.status + " (projeto pausado?)."); }
         }), 8000);
       },
       sessao: function () {

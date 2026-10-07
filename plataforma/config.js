@@ -7,6 +7,6 @@
    Se os campos ficarem vazios, a plataforma abre no MODO DEMONSTRAÇÃO (dados só no navegador).
    ========================================================= */
 window.CICLO_PRATO_CONFIG = {
-  supabaseUrl: "",
-  supabaseChave: ""
+  supabaseUrl: "https://xehcgloexizdvojuxjwe.supabase.co",
+  supabaseChave: "sb_publishable_9CkMr6LJwn6_YZ1sy3qzaA_apP5iaSb"
 };
