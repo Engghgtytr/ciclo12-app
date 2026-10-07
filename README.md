@@ -17,7 +17,7 @@ O Ciclo 12 é **um sistema só, com 4 módulos**. Cada módulo ataca um ou mais 
 | `/site/` | **Ciclo Consumo** (site) | Consumo de água e energia: conteúdo, calculadora, gráfico e cadastro simples | pronto (Etapa 2) |
 | `/chatbot/` | **Ciclo Bot** (chatbot) | Dúvidas sobre reciclagem, funciona por regras, offline e sem chave de API | pronto (Etapa 3) |
 | `/app/` | **Ciclo Ponto** (app PWA) | Lixo eletrônico e roupas/objetos: GPS, câmera e lembretes, instalável no celular | pronto (Etapa 4) |
-| `/plataforma/` | **Ciclo Prato** (plataforma) | Desperdício de alimentos: login, 3 perfis (doador, receptor, admin), doações com status e painel | a fazer (Etapa 5) |
+| `/plataforma/` | **Ciclo Prato** (plataforma) | Desperdício de alimentos: login, 3 perfis (doador, receptor, admin), doações com status e painel | pronto (Etapa 5) |
 
 ## Estrutura de pastas
 
