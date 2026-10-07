@@ -15,7 +15,7 @@ O Ciclo 12 é **um sistema só, com 4 módulos**. Cada módulo ataca um ou mais 
 |---|---|---|---|
 | `/` (`index.html`) | **Hub** | Mostra os 5 problemas com dados e fonte, o mapa de descarte e os links para os módulos | pronto (Etapa 1) |
 | `/site/` | **Ciclo Consumo** (site) | Consumo de água e energia: conteúdo, calculadora, gráfico e cadastro simples | pronto (Etapa 2) |
-| `/chatbot/` | **Ciclo Bot** (chatbot) | Dúvidas sobre reciclagem, funciona por regras, offline e sem chave de API | a fazer (Etapa 3) |
+| `/chatbot/` | **Ciclo Bot** (chatbot) | Dúvidas sobre reciclagem, funciona por regras, offline e sem chave de API | pronto (Etapa 3) |
 | `/app/` | **Ciclo Ponto** (app PWA) | Lixo eletrônico e roupas/objetos: GPS, câmera e lembretes, instalável no celular | a fazer (Etapa 4) |
 | `/plataforma/` | **Ciclo Prato** (plataforma) | Desperdício de alimentos: login, 3 perfis (doador, receptor, admin), doações com status e painel | a fazer (Etapa 5) |
 
