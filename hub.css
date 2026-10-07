@@ -3,82 +3,17 @@
    Usa os tokens de shared/estilo.css. Cantos: cartões 12px, botões/campos 8px.
    ========================================================= */
 
-/* Cores dos gráficos (validadas com o validador do skill dataviz, claro e escuro) */
 :root {
-  --viz-1: #2a78d6;
-  --viz-2: #eb6834;
-  --viz-3: #1baf7a;
-  --viz-destaque: var(--cor-primaria);
-  --viz-resto: #a7b4ab;
   --pino-pev: #17673f;
   --pino-escola: #1f4fa3;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --viz-1: #3987e5;
-    --viz-2: #d95926;
-    --viz-3: #199e70;
-    --viz-resto: #4d6355;
     --pino-pev: #5ccf8c;
     --pino-escola: #7cb8ff;
   }
 }
 
-/* ---------- Topo ---------- */
-.topo {
-  position: sticky;
-  top: 0;
-  z-index: 1000; /* acima do mapa (Leaflet usa até 1000 nos controles) */
-  background: var(--cor-superficie);
-  border-bottom: 1px solid var(--cor-borda);
-}
-.topo-miolo {
-  max-width: var(--largura-max);
-  margin: 0 auto;
-  padding: var(--esp-2) var(--esp-4);
-  display: flex;
-  align-items: center;
-  gap: var(--esp-4);
-  flex-wrap: wrap;
-}
-.marca {
-  display: flex;
-  align-items: center;
-  gap: var(--esp-2);
-  font-weight: 800;
-  font-size: 1.2rem;
-  color: var(--cor-texto);
-  text-decoration: none;
-}
-.navegacao {
-  display: flex;
-  gap: var(--esp-1);
-  margin-left: auto;
-  overflow-x: auto;
-  max-width: 100%;
-}
-.navegacao a {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 var(--esp-3);
-  border-radius: var(--raio-pequeno);
-  font-weight: 600;
-  color: var(--cor-texto-suave);
-  text-decoration: none;
-}
-.navegacao a:hover {
-  color: var(--cor-texto);
-  background: var(--cor-superficie-2);
-}
-.navegacao a[aria-current="page"] {
-  color: var(--cor-primaria);
-  background: var(--cor-superficie-2);
-}
-@media (max-width: 560px) {
-  .navegacao { margin-left: 0; width: 100%; }
-}
 
 main.container {
   padding-top: var(--esp-5);
@@ -229,6 +164,15 @@ main.container {
   border: 1px dashed var(--cor-borda);
   border-radius: var(--raio);
 }
+a.modulo-pronto {
+  height: 100%;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-primaria);
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+a.modulo-pronto:hover { background: var(--cor-superficie-2); }
+.modulos > li { display: grid; }
 .modulo-nome {
   font-weight: 800;
   font-size: 1.1rem;
@@ -271,43 +215,6 @@ main.container {
 .grafico figcaption {
   font-weight: 700;
   margin-bottom: var(--esp-2);
-}
-.barra-svg {
-  display: block;
-  width: 100%;
-  max-width: 36rem;
-  height: auto;
-}
-.viz-1 { fill: var(--viz-1); background: var(--viz-1); }
-.viz-2 { fill: var(--viz-2); background: var(--viz-2); }
-.viz-3 { fill: var(--viz-3); background: var(--viz-3); }
-.viz-destaque { fill: var(--viz-destaque); background: var(--viz-destaque); }
-.viz-resto { fill: var(--viz-resto); background: var(--viz-resto); }
-.viz-eixo { stroke: var(--cor-texto-suave); stroke-width: 1; }
-.barra-svg rect:hover { opacity: 0.85; }
-.legenda {
-  list-style: none;
-  padding: 0;
-  margin: var(--esp-2) 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--esp-2) var(--esp-4);
-  font-size: var(--tam-pequeno);
-}
-.legenda li {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--esp-2);
-}
-.amostra {
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  flex: none;
-}
-.fonte {
-  font-size: var(--tam-pequeno);
-  color: var(--cor-texto-suave);
 }
 .meta-ods {
   background: var(--cor-superficie-2);
@@ -492,20 +399,3 @@ main.container {
   font-size: var(--tam-pequeno);
 }
 .lista-doacao-titulo { margin-top: var(--esp-5); font-size: 1.05rem; }
-
-/* ---------- Rodapé ---------- */
-.rodape-grade {
-  display: grid;
-  gap: var(--esp-5);
-  grid-template-columns: 1fr;
-}
-@media (min-width: 860px) {
-  .rodape-grade { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
-}
-.rodape-titulo { font-size: 1rem; }
-.referencias {
-  margin: 0;
-  padding-left: 1.1rem;
-  display: grid;
-  gap: var(--esp-1);
-}
