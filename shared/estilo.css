@@ -413,7 +413,7 @@ textarea:focus-visible {
    O texto do rótulo vem do HTML (não só da cor), para não depender só da cor.
 */
 .aviso {
-  border-left: 5px solid;
+  border: 1px solid;
   border-radius: var(--raio-pequeno);
   padding: var(--esp-3) var(--esp-4);
   margin: 0 0 var(--esp-4);
