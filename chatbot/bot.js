@@ -8,6 +8,11 @@
 (function () {
   "use strict";
 
+  // Funcionar sem internet depois do primeiro acesso (guarda os arquivos no aparelho)
+  if ("serviceWorker" in navigator && window.isSecureContext) {
+    navigator.serviceWorker.register("service-worker.js").catch(function () { /* sem offline: o bot continua funcionando */ });
+  }
+
   var BOT = window.CICLO_BOT;
   var PONTOS = window.CICLO_PONTOS;
   function $(id) { return document.getElementById(id); }

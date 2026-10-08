@@ -90,10 +90,10 @@
   function telaEntrada(modoInicial) {
     area.textContent = "";
     var modo = modoInicial || "entrar";
-    var abas = el("div", { className: "abas", role: "tablist" });
+    var abas = el("div", { className: "abas", role: "group", "aria-label": "Entrar ou criar conta" });
     var corpo = el("div", { className: "painel" });
     function aba(id, texto) {
-      return el("button", { className: "aba", role: "tab", type: "button", "aria-selected": String(modo === id), text: texto, onclick: function () { telaEntrada(id); } });
+      return el("button", { className: "aba", type: "button", "aria-pressed": String(modo === id), text: texto, onclick: function () { telaEntrada(id); } });
     }
     abas.appendChild(aba("entrar", "Entrar"));
     abas.appendChild(aba("cadastro", "Criar conta"));
@@ -461,11 +461,11 @@
       ]));
       return;
     }
-    var barra = el("div", { className: "abas", role: "tablist" });
+    var barra = el("div", { className: "abas", role: "group", "aria-label": "Seções" });
     abas.forEach(function (a) {
-      barra.appendChild(el("button", { className: "aba", role: "tab", type: "button", "aria-selected": String(abaAtual === a[0]), text: a[1], onclick: function () { abaAtual = a[0]; mensagem(); mostrar(); } }));
+      barra.appendChild(el("button", { className: "aba", type: "button", "aria-pressed": String(abaAtual === a[0]), text: a[1], onclick: function () { abaAtual = a[0]; mensagem(); mostrar(); } }));
     });
-    var box = el("div", { className: "painel", role: "tabpanel", "aria-live": "polite" }, [el("p", { className: "texto-pequeno", text: "Carregando..." })]);
+    var box = el("div", { className: "painel", "aria-live": "polite" }, [el("p", { className: "texto-pequeno", text: "Carregando..." })]);
     area.appendChild(barra);
     area.appendChild(box);
 

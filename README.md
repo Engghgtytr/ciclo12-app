@@ -37,7 +37,6 @@ ciclo12/
 ├── prints/             imagens para os slides
 ├── _dados/             dados brutos, scripts e pendências (COLETAR.md)
 ├── _testes/            testes automáticos (Playwright + Edge, PGlite, Supabase)
-├── _referencia/        versão antiga do Ciclo 12 (só consulta)
 └── RELATORIO_FINAL.md  o que funciona, o que é exemplo e o que não foi testado
 ```
 

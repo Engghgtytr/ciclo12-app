@@ -5,7 +5,7 @@
    - Ecopontos (PEVs) de Guarulhos, o que recebem e o que NÃO recebem:
      Agência Mural, 10/10/2025 (https://agenciamural.org.br/confira-onde-estao-os-ecopontos-de-guarulhos/)
    - Cores da coleta seletiva: Resolução CONAMA nº 275/2001, anexo (PDF oficial do CONAMA)
-   - Logística reversa (lojas e fabricantes devem receber de volta): Lei 12.305/2010, art. 33
+   - Logística reversa (fabricantes e comerciantes devem organizar a coleta de volta): Lei 12.305/2010, art. 33
      (pilhas e baterias, pneus, óleos lubrificantes, lâmpadas fluorescentes, eletroeletrônicos)
 
    Campos de cada item:
@@ -21,7 +21,7 @@
   var CONFIRMADO = "confirmado";
   var CONFIRME = "confirme com a prefeitura";
   var PEV_SIM = "Pode levar a um Ecoponto (PEV) de Guarulhos: a matéria da Agência Mural lista esse material entre os aceitos. Para grandes quantidades, veja os limites no site da Prefeitura.";
-  var REVERSA = "Pela Lei 12.305/2010 (art. 33), quem fabrica e vende esse produto é obrigado a ter logística reversa, ou seja, receber de volta. Pergunte nas lojas que vendem o produto e confirme com a Prefeitura de Guarulhos.";
+  var REVERSA = "Pela Lei 12.305/2010 (art. 33), quem fabrica e vende esse produto é obrigado a organizar a coleta de volta (logística reversa). Muitas lojas que vendem o produto têm ponto de coleta: pergunte antes de ir e confirme com a Prefeitura de Guarulhos.";
 
   var LIXEIRAS = {
     azul: "azul (papel e papelão)",

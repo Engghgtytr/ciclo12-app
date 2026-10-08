@@ -392,10 +392,10 @@
         return { confirmado: true, texto: "Ecoponto mais perto que recebe este tipo de item (segundo a Agência Mural):", ponto: perto };
       }
       if (item.tipo === "pilha") {
-        return { confirmado: false, texto: "Os Ecopontos NÃO recebem pilhas e baterias (Agência Mural). Pela Lei 12.305/2010, lojas e fabricantes devem receber de volta. Confirme antes de ir." };
+        return { confirmado: false, texto: "Os Ecopontos NÃO recebem pilhas e baterias (Agência Mural). Pela Lei 12.305/2010, fabricantes e comerciantes devem organizar a coleta de volta; muitas lojas têm ponto de coleta. Confirme antes de ir." };
       }
       if (item.tipo === "pequeno") {
-        return { confirmado: false, texto: "A fonte não confirma que os Ecopontos recebem celular e eletrônicos pequenos. Pela Lei 12.305/2010, lojas e fabricantes devem receber de volta. Confirme antes de ir." };
+        return { confirmado: false, texto: "A fonte não confirma que os Ecopontos recebem celular e eletrônicos pequenos. Pela Lei 12.305/2010, fabricantes e comerciantes devem organizar a coleta de volta; muitas lojas têm ponto de coleta. Confirme antes de ir." };
       }
       return { confirmado: false, texto: "Não temos um ponto confirmado para descartar este tipo de item. Confirme antes de ir (Prefeitura de Guarulhos)." };
     }

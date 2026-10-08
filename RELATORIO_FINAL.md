@@ -33,9 +33,10 @@ Atualizado em 07/10/2026. Os testes automáticos rodam com Playwright no Microso
 - **Site:** os 9 L/min de vazão do chuveiro são um **valor de partida do grupo**, sem fonte (a tela diz isso e ensina a medir). O dado de 154 L/dia é de 2018.
 
 **Módulos**
+- **Funcionar sem internet (testado em 08/10):** só o **app** e o **chatbot** abrem de novo sem internet, depois de abertos uma vez com internet. O hub, o site e a plataforma precisam de internet; para a apresentação sem internet, rodem o site no notebook (`python -m http.server`), veja o plano B em `_apresentacao/SLIDES_PITCH.md`.
 - **Chatbot:** funciona **por regras, não é inteligência artificial**. Dos 47 itens, 19 têm destino confirmado pela fonte e 28 dizem "confirme com a Prefeitura de Guarulhos". Não existe versão no WhatsApp.
 - **App:** o lembrete é **notificação local** e só aparece na hora certa com o app aberto; se estiver fechado, aparece quando o app for aberto. Push com o app fechado não foi feito. Sem internet, o mapa de ruas não aparece (a lista funciona). Ainda não está em loja de aplicativos.
-- **Plataforma:** só tem **contas de teste** (nenhuma ONG ou comércio real). O modo demonstração usa dados fictícios. "Refeições equivalentes" aparece como **TODO** até o grupo definir a conversão com fonte. A foto da doação (opcional no plano) não foi feita. O plano grátis do Supabase pode pausar se ficar sem uso.
+- **Plataforma:** só tem **contas de teste** (nenhuma ONG ou comércio real). O modo demonstração usa dados fictícios. "Refeições equivalentes" aparece como **TODO** até o grupo definir a conversão com fonte. A foto da doação (opcional no plano) não foi feita. O plano grátis do Supabase pode pausar se ficar sem uso. **Não dá para cancelar uma reserva**: se a ONG não buscar, a doação fica como "reservada". Qualquer pessoa com o link pode criar conta (o admin modera; depois do pitch, dá para desligar novos cadastros no Supabase).
 - **Site, cadastro "Receber dicas":** fica só no navegador; nenhum e-mail é enviado.
 
 **Pendências do grupo (não são código)**

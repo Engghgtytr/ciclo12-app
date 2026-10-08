@@ -334,7 +334,8 @@ code {
 .aba:hover {
   color: var(--cor-texto);
 }
-.aba[aria-selected="true"] {
+.aba[aria-selected="true"],
+.aba[aria-pressed="true"] {
   color: var(--cor-primaria);
   border-bottom-color: var(--cor-primaria);
 }

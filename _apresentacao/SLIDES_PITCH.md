@@ -33,7 +33,7 @@ Identidade visual: verde do Ciclo 12 (`#17673f`), fundo claro, logo de duas seta
 **Na tela**
 > **5 problemas**
 > Comida: 1,05 bi t desperdiçadas
-> Lixo eletrônico: 22,3% reciclado
+> Lixo eletrônico: 22,3% com reciclagem documentada
 > Brasil recicla 4%
 > Água: 154 L/dia (ONU: 110 L)
 > Roupas: 73% em aterro ou incineração
@@ -82,20 +82,20 @@ Identidade visual: verde do Ciclo 12 (`#17673f`), fundo claro, logo de duas seta
 
 **Na tela**
 > **Como tudo se liga**
-> Hub com mapa dos 33 Ecopontos
+> Hub: 33 Ecopontos (24 no mapa)
 > App: GPS, câmera, lembretes
-> Bot: 47 itens, funciona offline
+> Bot: 47 itens, sem IA, funciona offline
 > Plataforma: login e 3 perfis
 > ▶ Demonstração ao vivo
 
 **Visual:** o diagrama `prints/diagrama.png` ocupando o slide. Depois de 25 s, o Davi troca para o celular espelhado ou o navegador.
 
 **Fala (Davi, 25 s antes da demonstração):**
-"Tudo começa no hub, que mostra os cinco problemas e um mapa com os 33 Ecopontos de Guarulhos. O app e o chatbot usam a mesma lista de pontos do mapa. O app usa GPS, câmera e lembrete; o chatbot responde 47 itens sem internet; e a plataforma tem login de verdade, com doador, receptor e administrador. Vou mostrar funcionando."
+"Tudo começa no hub, que mostra os cinco problemas e a lista dos 33 Ecopontos de Guarulhos, 24 deles no mapa. O app e o chatbot usam a mesma lista de pontos do mapa. O app usa GPS, câmera e lembrete; o chatbot responde 47 itens e funciona sem internet depois de aberto uma vez; e a plataforma tem login de verdade, com doador, receptor e administrador. Vou mostrar funcionando."
 
 ### ▶ DEMONSTRAÇÃO AO VIVO (45 s), dentro do slide 5
 Deixar tudo aberto antes de começar (app já carregado uma vez, permissões de localização já dadas).
-1. **(0 a 12 s) App, aba Pontos:** tocar em **"Perto de mim"**. "Com o GPS, ele ordena os Ecopontos pela distância. O mais perto da escola fica a uns 500 metros."
+1. **(0 a 12 s) App, aba Pontos:** tocar em **"Perto de mim"**. "Com o GPS, ele ordena os Ecopontos pela distância. O mais perto da escola fica a menos de 1 quilômetro."
 2. **(12 a 27 s) App, aba Doar:** tirar a foto de um objeto, escolher "Eletrônico, eletrodoméstico, descartar" e salvar. "Ele tira a foto, guarda no celular e indica o ponto certo, porque esse ponto aceita eletrodoméstico."
 3. **(27 a 45 s) Chatbot:** digitar **"bateia de selular"** (com erro de propósito). "Mesmo com erro de digitação ele entende, e avisa que os Ecopontos não recebem bateria, segundo a fonte."
 
@@ -109,13 +109,13 @@ Deixar tudo aberto antes de começar (app já carregado uma vez, permissões de 
 > **Requisitos**
 > GPS, câmera, lembrete
 > Login com 3 perfis
-> Funciona no celular e offline
+> Feito para celular; app e bot funcionam offline
 > Dados com fonte, segurança no banco
 
 **Visual:** um quadro Kanban de 4 colunas com cartões reais do projeto (ex.: "Mapa dos 33 Ecopontos" em Feito, "Confirmar pontos de doação" em A fazer). À direita, a lista de requisitos.
 
 **Fala (Davi, 35 s):**
-"A gente trabalhou com Kanban: um quadro com 'a fazer', 'fazendo', 'testando' e 'feito'. Como tínhamos poucos dias, isso funcionou melhor que dividir em sprints. Cada parte só ia para 'feito' depois de testada no navegador e no celular. Os requisitos principais foram: GPS, câmera e lembrete no app; login com três perfis na plataforma; tudo funcionando no celular; e nenhum dado sem fonte."
+"A gente trabalhou com Kanban: um quadro com 'a fazer', 'fazendo', 'testando' e 'feito'. Como tínhamos poucos dias, isso funcionou melhor que dividir em sprints. Cada parte só ia para 'feito' depois de testada no navegador, em tamanho de celular. Os requisitos principais foram: GPS, câmera e lembrete no app; login com três perfis na plataforma; tudo pensado para celular; e nenhum dado sem fonte."
 
 ---
 
@@ -131,7 +131,7 @@ Deixar tudo aberto antes de começar (app já carregado uma vez, permissões de 
 **Visual:** 4 linhas, cada uma com o número da meta em destaque e o ícone do módulo à direita.
 
 **Fala (Julia, 35 s):**
-"Cada módulo atende uma meta da ODS 12. O Ciclo Consumo atende a meta 12.2, de usar bem os recursos naturais, como água e energia. O Ciclo Prato atende a 12.3, que é reduzir pela metade o desperdício de comida até 2030. O Ciclo Ponto atende a 12.5, reduzir resíduos com reúso e reciclagem. E o Ciclo Bot atende a 12.8, que é garantir que todo mundo tenha informação para consumir melhor."
+"Cada módulo atende uma meta da ODS 12. O Ciclo Consumo atende a meta 12.2, de usar bem os recursos naturais, como água e energia. O Ciclo Prato atende a 12.3, que é reduzir pela metade, até 2030, o desperdício de comida por pessoa no comércio e nas casas. O Ciclo Ponto atende a 12.5, reduzir resíduos com reúso e reciclagem. E o Ciclo Bot atende a 12.8, que é garantir que todo mundo tenha informação para consumir melhor."
 
 ---
 
@@ -170,9 +170,11 @@ Deixar tudo aberto antes de começar (app já carregado uma vez, permissões de 
 
 ## Plano B: se a internet cair
 
+Testado em 08/10/2026: sem internet, **só o app e o chatbot abrem de novo** (depois de abertos uma vez com internet). O hub, o site e a plataforma precisam de internet para abrir.
+
 1. **Vídeo de backup (o mais importante):** gravem antes, no celular, 1 a 2 minutos fazendo a demonstração acima. Se a internet cair, passem o vídeo no lugar do passo ao vivo e digam: "a internet caiu, então vamos mostrar o vídeo que gravamos funcionando".
-2. **App e chatbot funcionam sem internet** se forem abertos uma vez antes, com internet. Abram os dois no celular antes de entrar na sala. (O mapa de ruas não aparece offline, mas a lista de pontos sim.)
-3. **Plataforma:** precisa de internet. Sem ela, abra `.../plataforma/?modo=demo`: aparece a faixa "DEMONSTRAÇÃO" e o fluxo funciona com dados fictícios. **Digam que é a demonstração.**
+2. **Celular:** abram o app e o chatbot uma vez com internet antes de entrar na sala. Depois disso eles abrem e funcionam sem internet (o mapa de ruas não aparece, mas a lista de pontos sim).
+3. **Notebook com o site rodando localmente (funciona sem internet):** antes da aula, copiem a pasta `ciclo12` para o notebook. Na hora, abram o PowerShell dentro da pasta e rodem `python -m http.server 8000`; no navegador, abram `http://localhost:8000`. Tudo abre, menos o mapa de ruas e o login real da plataforma. A plataforma entra sozinha no **modo demonstração**, com a faixa "DEMONSTRAÇÃO": **digam que é a demonstração.**
 4. **Prints:** se nada abrir, mostrem os prints de `prints/` no próprio slide 5.
 
 ---
@@ -186,7 +188,7 @@ Deixar tudo aberto antes de começar (app já carregado uma vez, permissões de 
    Os 33 Ecopontos vêm da lista publicada pela Agência Mural em outubro de 2025. Algumas posições no mapa são aproximadas e estão marcadas assim. Ainda não ligamos para cada um para confirmar.
 
 3. **"Onde eu levo uma camiseta ou um celular?"**
-   Segundo a fonte, os Ecopontos não citam roupa nem celular, então o sistema diz "confirme antes de ir". Para celular, a lei de logística reversa obriga as lojas a receber de volta. Os locais de doação de roupa ainda estão como exemplo.
+   Segundo a fonte, os Ecopontos não citam roupa nem celular, então o sistema diz "confirme antes de ir". Para celular, a Lei 12.305 obriga fabricantes e comerciantes a organizar a coleta de volta (logística reversa); muitas lojas têm ponto de coleta, mas é bom confirmar. Os locais de doação de roupa ainda estão como exemplo.
 
 4. **"O chatbot é inteligência artificial?"**
    Não. Ele funciona por regras: procura as palavras numa lista de 47 itens que o grupo escreveu e aceita erro de digitação. Quando não tem regra confirmada, ele avisa em vez de inventar.
