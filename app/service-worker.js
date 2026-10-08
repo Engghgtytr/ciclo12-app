@@ -8,7 +8,7 @@
      Mapas de ruas (tiles) não são guardados: são muitos.
    Ao mudar arquivos do app, aumente o número da VERSAO.
    ========================================================= */
-var VERSAO = "ciclo-ponto-v2";
+var VERSAO = "ciclo-ponto-v4";
 var ARQUIVOS = [
   "./",
   "./index.html",

@@ -1,6 +1,6 @@
 # Ciclo 12
 
-Trabalho escolar sobre a **ODS 12 — Consumo e Produção Responsáveis**.
+Trabalho escolar sobre a **ODS 12: Consumo e Produção Responsáveis**.
 
 - **Grupo:** Enzo Penchel, Bárbara Valentina, Davi Biguetti e Julia Ayumi
 - **Escola:** Colégio Progresso, Av. Timóteo Penteado, 4405, Vila Galvão, Guarulhos/SP (endereço ainda a confirmar com a secretaria)
@@ -23,19 +23,22 @@ O Ciclo 12 é **um sistema só, com 4 módulos**. Cada módulo ataca um ou mais 
 
 ```
 ciclo12/
-├── index.html          (hub, Etapa 1)
-├── app/                (Ciclo Ponto)
-├── plataforma/         (Ciclo Prato)
-├── chatbot/            (Ciclo Bot)
-├── site/               (Ciclo Consumo)
-├── shared/             (arquivos usados por todos os módulos)
-│   ├── estilo.css      cores claro/escuro, botões, cartões, abas, formulários, avisos
-│   ├── logo.svg        logo próprio (duas setas formando um ciclo)
-│   ├── favicon.svg     ícone da aba do navegador
-│   └── pontos.js       lista de pontos de coleta (Etapa 1)
-├── _dados/             dados brutos e pendências (não aparecem no site)
-│   └── pevs_guarulhos.md
-└── _referencia/        material de consulta
+├── index.html          hub: 5 problemas, gráficos e mapa de descarte
+├── sobre.html          diagrama do sistema, fontes e próximos passos
+├── app/                Ciclo Ponto (app PWA: manifesto, service worker, ícones)
+├── plataforma/         Ciclo Prato (banco.sql, config.js, telas)
+├── chatbot/            Ciclo Bot (conhecimento.js com 47 itens)
+├── site/               Ciclo Consumo
+├── shared/             arquivos usados por todos os módulos
+│   ├── estilo.css      cores claro/escuro, componentes, rodapé, animação
+│   ├── animacao.js     animação de entrada e ao rolar
+│   ├── logo.svg / favicon.svg
+│   └── pontos.js       33 Ecopontos + escola (gerado por _dados/gerar_pontos.mjs)
+├── prints/             imagens para os slides
+├── _dados/             dados brutos, scripts e pendências (COLETAR.md)
+├── _testes/            testes automáticos (Playwright + Edge, PGlite, Supabase)
+├── _referencia/        versão antiga do Ciclo 12 (só consulta)
+└── RELATORIO_FINAL.md  o que funciona, o que é exemplo e o que não foi testado
 ```
 
 ## Como rodar no seu computador
@@ -57,17 +60,41 @@ instalação do app exigem HTTPS, então teste esses recursos no link do GitHub 
 
 ## Como publicar no GitHub Pages (grátis, com HTTPS)
 
-1. Crie uma conta em <https://github.com> (se ainda não tiver).
-2. Clique em **New repository**, dê o nome `ciclo12` e marque **Public**.
-3. Envie os arquivos desta pasta: na página do repositório, use **Add file → Upload files**,
-   arraste o conteúdo da pasta `ciclo12` e clique em **Commit changes**.
-   (Ou, pelo terminal, com `git remote add origin ...` e `git push`.)
-4. Vá em **Settings → Pages**. Em *Build and deployment*, escolha **Deploy from a branch**,
-   branch **main**, pasta **/ (root)**, e clique em **Save**.
-5. Espere 1 a 2 minutos. O link fica assim: `https://SEU-USUARIO.github.io/ciclo12/`
+O projeto já é um repositório git com o histórico de commits. O jeito mais fácil é mandar esse histórico para o GitHub.
+
+**1. Criar o repositório vazio no GitHub**
+1. Entre em <https://github.com> (crie a conta se não tiver).
+2. Clique no **+** (canto de cima, à direita) e depois em **New repository**.
+3. Em *Repository name*, escreva `ciclo12`. Marque **Public**.
+4. **Não** marque "Add a README", nem .gitignore, nem licença (o repositório precisa nascer vazio).
+5. Clique em **Create repository**.
+
+**2. Enviar os arquivos (PowerShell, dentro da pasta `ciclo12`)**
+```
+git remote add origin https://github.com/SEU-USUARIO/ciclo12.git
+git push -u origin main
+```
+Na primeira vez, o Windows abre uma janela do navegador para você entrar no GitHub (é o Git Credential Manager). Depois disso o envio continua sozinho.
+
+*Sem terminal:* na página do repositório vazio, clique em **uploading an existing file**, arraste **o conteúdo** da pasta `ciclo12` (não a pasta em si) e clique em **Commit changes**. Assim o histórico de commits não vai junto.
+
+**3. Ligar o GitHub Pages**
+1. No repositório, vá em **Settings** e depois em **Pages** (menu da esquerda).
+2. Em *Build and deployment*, escolha **Deploy from a branch**.
+3. Branch **main**, pasta **/ (root)**, e clique em **Save**.
+4. Espere 1 a 2 minutos e recarregue a página: aparece o link.
+
+**Link esperado:** `https://SEU-USUARIO.github.io/ciclo12/`
+(app: `.../ciclo12/app/` · plataforma: `.../ciclo12/plataforma/` · chatbot: `.../ciclo12/chatbot/` · site: `.../ciclo12/site/`)
+
+**4. Depois de publicar**
+- Abra o link no celular e teste o app (instalar, GPS, câmera, lembrete): veja o RELATORIO_FINAL.md.
+- No Supabase, em **Authentication → URL Configuration**, coloque o link do GitHub Pages em *Site URL* (só importa se um dia ligarem o "Confirm email").
 
 **Atenção:** o repositório é público, então qualquer pessoa vê os arquivos.
-**Nunca** coloque senha ou chave secreta nele. A chave `service_role` do Supabase nunca entra no código.
+**Nunca** coloque senha ou chave secreta nele. A chave `service_role`/`secret` do Supabase nunca entra no código;
+a chave `publishable` em `plataforma/config.js` é pública de propósito (quem protege os dados é o RLS do `banco.sql`).
+As senhas das contas de teste ficam em `CONTAS_TESTE_NAO_PUBLICAR.json`, **fora** desta pasta.
 
 ## Regras de dados do projeto
 
@@ -80,4 +107,5 @@ instalação do app exigem HTTPS, então teste esses recursos no link do GitHub 
 ## Tecnologia
 
 HTML, CSS e JavaScript puros, sem framework e sem etapa de build. Dependências externas:
-Leaflet (mapa, via cdnjs) e, só na plataforma, o cliente do Supabase via CDN.
+Leaflet (mapa, via cdnjs, carregado só quando o mapa é aberto) e, só na plataforma, o cliente do Supabase via jsDelivr.
+As duas têm hash de integridade (SRI), então o navegador recusa qualquer arquivo alterado.

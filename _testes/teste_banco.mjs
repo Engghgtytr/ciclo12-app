@@ -41,9 +41,10 @@ async function como(uid, texto, params = [], papel = 'authenticated') {
     });
   } catch (e) { return { ok: false, erro: e.message }; }
 }
-const hoje = new Date().toISOString().slice(0, 10);
-const amanha = new Date(Date.now() + 86400e3).toISOString().slice(0, 10);
-const ontem = new Date(Date.now() - 86400e3).toISOString().slice(0, 10);
+const dataSP = (n) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date(Date.now() + n * 86400e3));
+const hoje = dataSP(0);
+const amanha = dataSP(1);
+const ontem = dataSP(-1);
 const criar = (uid, extra = {}) => como(uid, 'select public.criar_doacao($1,$2,$3,$4,$5,$6,$7,$8) as id',
   [extra.alimento || 'Pães do dia', extra.categoria || 'padaria', extra.kg ?? 5, extra.validade || amanha, 'Vila Galvão', 'Rua de Teste, 100', 'Hoje, 17h às 18h', null]);
 

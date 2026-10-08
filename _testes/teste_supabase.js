@@ -12,7 +12,8 @@ const fase = process.argv[2] || '1';
 const res = [];
 const ok = (nome, cond, extra = '') => res.push([cond ? 'PASSOU' : 'FALHOU', nome, extra]);
 const cliente = () => createClient(URL, CHAVE, { auth: { persistSession: false, autoRefreshToken: false } });
-const dia = (n) => { const d = new Date(Date.now() + n * 86400e3); return d.toISOString().slice(0, 10); };
+const dataSP = (n) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date(Date.now() + n * 86400e3));
+const dia = dataSP;
 const senha = () => 'Ciclo12-' + crypto.randomBytes(6).toString('base64url');
 
 (async () => {

@@ -400,6 +400,7 @@ textarea:focus-visible {
   min-height: 44px;
 }
 .campo-opcao input {
+  flex: none; /* não encolhe quando o texto quebra em 2 linhas */
   width: 1.25rem;
   height: 1.25rem;
   accent-color: var(--cor-primaria);
@@ -651,6 +652,24 @@ textarea:focus-visible {
 }
 @media print {
   .anim-js .revelar { opacity: 1; transform: none; }
+}
+
+/* ---------- 13. Rodapé padrão (igual em todas as páginas) ---------- */
+.rodape-padrao { margin-top: var(--esp-4); padding-top: var(--esp-4); border-top: 1px solid var(--cor-borda); }
+.rodape-padrao p { margin: 0; }
+/* quando o rodapé só tem a parte padrão, não repete a linha divisória */
+.rodape > .rodape-padrao:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.rodape-modulos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--esp-1) var(--esp-4);
+  margin-bottom: var(--esp-3);
+}
+.rodape-modulos a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  font-weight: 600;
 }
 
 /* ---------- 10. Movimento reduzido ---------- */

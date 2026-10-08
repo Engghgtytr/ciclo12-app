@@ -1,0 +1,9 @@
+# Nunca publicar senhas ou chaves secretas
+CONTAS_TESTE*
+*.env
+.env*
+*segredo*
+*secret*
+
+# Pastas de ferramentas (se alguém instalar dentro do projeto)
+node_modules/

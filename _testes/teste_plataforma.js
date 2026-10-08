@@ -7,8 +7,9 @@ fs.mkdirSync('prints6', { recursive: true });
 const URL = 'http://localhost:8766/plataforma/';
 const res = [];
 const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', nome, extra]); };
-const amanha = new Date(Date.now() + 86400e3).toISOString().slice(0, 10);
-const ontem = new Date(Date.now() - 86400e3).toISOString().slice(0, 10);
+const dataSP = (n) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo' }).format(new Date(Date.now() + n * 86400e3));
+const amanha = dataSP(1);
+const ontem = dataSP(-1);
 
 (async () => {
   const b = await chromium.launch({ channel: 'msedge' });

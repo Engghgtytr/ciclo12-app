@@ -1,4 +1,3 @@
-// Uso: rode "python -m http.server 8766" na pasta ciclo12; numa pasta com playwright (npm i playwright): node teste_site.js
 // Teste do site Ciclo Consumo com Playwright + Microsoft Edge.
 // Uso: "python -m http.server 8766" na pasta ciclo12; depois: node teste_site.js
 const { chromium } = require('playwright');
@@ -154,7 +153,7 @@ const ok = (nome, cond, extra = '') => { res.push([cond ? 'PASSOU' : 'FALHOU', n
     ok('link "Voltar ao Ciclo 12" aponta para página que existe', resp.status() === 200 && (await p.getAttribute('.navegacao a:last-child', 'href')) === '../index.html');
     await p.click('.navegacao a:last-child'); await p.waitForLoadState('networkidle');
     ok('clicar em "Voltar ao Ciclo 12" abre o hub', /Cinco problemas/.test(await p.textContent('h1')));
-    await p.click('a.modulo-pronto'); await p.waitForLoadState('networkidle');
+    await p.click('a.modulo-pronto[href="site/"]'); await p.waitForLoadState('networkidle');
     ok('no hub, o cartão "Ciclo Consumo" abre o site', /banho da sua casa/.test(await p.textContent('h1')));
     await ctx.close();
   }

@@ -24,6 +24,7 @@ drop function if exists public.reservar_doacao(bigint) cascade;
 drop function if exists public.confirmar_retirada(bigint) cascade;
 drop function if exists public.aprovar_receptor(uuid, boolean) cascade;
 drop function if exists public.validade_futura() cascade;
+drop function if exists public.hoje_sp() cascade;
 drop function if exists public.e_admin() cascade;
 drop function if exists public.e_receptor_aprovado() cascade;
 drop function if exists public.e_doador() cascade;
@@ -76,11 +77,17 @@ create table public.reservas (
 );
 create index reservas_receptor_idx on public.reservas (receptor_id);
 
+-- "Hoje" no horário de Guarulhos (o servidor do Supabase usa UTC: depois das 21h já seria amanhã)
+create function public.hoje_sp() returns date
+language sql stable set search_path = '' as $$
+  select (now() at time zone 'America/Sao_Paulo')::date;
+$$;
+
 -- Validade no passado nunca entra numa doação nova (nem alterada)
 create function public.validade_futura() returns trigger
 language plpgsql set search_path = '' as $$
 begin
-  if new.validade < current_date then
+  if new.validade < public.hoje_sp() then
     raise exception 'A validade precisa ser hoje ou depois.' using errcode = '23514';
   end if;
   return new;
@@ -170,7 +177,7 @@ begin
   select * into v from public.doacoes where id = p_doacao for update; -- trava a linha: dois receptores não reservam a mesma
   if not found then raise exception 'Doação não encontrada.' using errcode = 'P0002'; end if;
   if v.status <> 'disponivel' then raise exception 'Esta doação não está mais disponível.' using errcode = '42501'; end if;
-  if v.validade < current_date then raise exception 'Esta doação passou da validade.' using errcode = '42501'; end if;
+  if v.validade < public.hoje_sp() then raise exception 'Esta doação passou da validade.' using errcode = '42501'; end if;
   insert into public.reservas (doacao_id, receptor_id) values (p_doacao, auth.uid());
   update public.doacoes set status = 'reservada', reservada_em = now() where id = p_doacao;
 end;
@@ -218,6 +225,7 @@ revoke all on function public.reservar_doacao(bigint) from public, anon;
 revoke all on function public.confirmar_retirada(bigint) from public, anon;
 revoke all on function public.aprovar_receptor(uuid, boolean) from public, anon;
 revoke all on function public.e_admin() from public, anon;
+revoke all on function public.hoje_sp() from public, anon;
 revoke all on function public.e_doador() from public, anon;
 revoke all on function public.e_receptor_aprovado() from public, anon;
 revoke all on function public.sou_doador_da(bigint) from public, anon;
@@ -228,6 +236,7 @@ grant execute on function public.reservar_doacao(bigint) to authenticated;
 grant execute on function public.confirmar_retirada(bigint) to authenticated;
 grant execute on function public.aprovar_receptor(uuid, boolean) to authenticated;
 grant execute on function public.e_admin() to authenticated;
+grant execute on function public.hoje_sp() to authenticated;
 grant execute on function public.e_doador() to authenticated;
 grant execute on function public.e_receptor_aprovado() to authenticated;
 grant execute on function public.sou_doador_da(bigint) to authenticated;
@@ -254,7 +263,7 @@ create policy "doacao: doador ve as proprias" on public.doacoes
   for select to authenticated using (doador_id = auth.uid());
 -- Impede: receptor ver doações reservadas por outros ou vencidas; receptor não aprovado não vê nada.
 create policy "doacao: receptor aprovado ve disponiveis e nao vencidas" on public.doacoes
-  for select to authenticated using (public.e_receptor_aprovado() and status = 'disponivel' and validade >= current_date);
+  for select to authenticated using (public.e_receptor_aprovado() and status = 'disponivel' and validade >= public.hoje_sp());
 -- Receptor continua vendo o que ELE reservou (para buscar).
 create policy "doacao: receptor ve o que reservou" on public.doacoes
   for select to authenticated using (public.reservei(id));
