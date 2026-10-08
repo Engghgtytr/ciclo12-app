@@ -655,10 +655,9 @@ textarea:focus-visible {
 }
 
 /* ---------- 13. Rodapé padrão (igual em todas as páginas) ---------- */
-.rodape-padrao { margin-top: var(--esp-4); padding-top: var(--esp-4); border-top: 1px solid var(--cor-borda); }
 .rodape-padrao p { margin: 0; }
-/* quando o rodapé só tem a parte padrão, não repete a linha divisória */
-.rodape > .rodape-padrao:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+/* linha divisória só quando há referências acima (hub e site); sozinho, o rodapé já tem a linha dele */
+.rodape > * + .rodape-padrao { margin-top: var(--esp-4); padding-top: var(--esp-4); border-top: 1px solid var(--cor-borda); }
 .rodape-modulos {
   display: flex;
   flex-wrap: wrap;
